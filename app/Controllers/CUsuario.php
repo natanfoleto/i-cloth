@@ -32,11 +32,11 @@ class CUsuario {
         return $Query->fetch();
     }
 
-    public function GetUnique($Id) {
-        $this->ObjUsuario->idUsuario = $this->ObjFunc->Base64($Id, 2);
+    public function GetUser($Object) {
+        $this->ObjUsuario->Nome = $Object['nome'];
 
-        $Query = $this->Conn->GetConnection()->prepare("SELECT * FROM {$this->table} WHERE nome LIKE ? ORDER BY :idUsuario DESC");
-        $Query->bindParam(":IdUsuario", $this->ObjUsuario->idUsuario, PDO::PARAM_INT);
+        $Query = $this->Conn->GetConnection()->prepare("SELECT * FROM {$this->table} WHERE nome LIKE :nome ORDER BY nome DESC");
+        $Query->bindParam(":nome", $this->ObjUsuario->Nome, PDO::PARAM_INT);
         $Query->execute();
         return $Query->fetch();
 	}

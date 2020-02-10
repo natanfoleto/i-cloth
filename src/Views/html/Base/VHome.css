@@ -20,6 +20,9 @@
 .navbar {
   padding: 10px 10px 10px 10px !important;
   border-bottom: 1px solid #F2F2F2;
+  margin-bottom: 20px;
+  position: absolute;
+  z-index: 9999; /* número máximo é 9999 */
 }
 
 ul li a {

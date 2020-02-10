@@ -4,11 +4,14 @@ function LoadPage(page) {
    window.location.replace('../../html/' + page + '.phtml');
 }
 
-function LoadCSS(url) {
+function LoadPageInternal(div, folder, page) {
+   $("#" + div).load('../../html/' + folder + '/' + page + '.phtml');
+}
+
+function LoadCSS(folder, url) {
    var lnk = document.createElement('link');
-   lnk.setAttribute('type', "text/css" );
+   lnk.setAttribute('href', '../' + folder + '/' + url + '.css' );
    lnk.setAttribute('rel', "stylesheet" );
-   lnk.setAttribute('href', './assets/css/' + url + '.css' );
    document.getElementsByTagName("head").item(0).appendChild(lnk);
 }
 

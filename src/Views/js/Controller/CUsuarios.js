@@ -1,3 +1,43 @@
+$(document).ready(() => {
+
+    $('#form-search').submit((event) => {
+        event.preventDefault();
+
+        alert('2');
+
+        xmlHttpPost('../../../Ajax/Usuarios/GetUser', function() {
+            beforeSend(() => {
+                
+            });
+            
+            success(() => {
+                if(JSON.parse(xhttp.responseText == 404)) {
+                    console.log(JSON.parse(xhttp.responseText));
+                } else {
+                    console.log(JSON.parse(xhttp.responseText));
+                }
+            });
+    
+            error(() => {
+                
+            });
+    
+        }, new FormData(document.querySelector("#form-search")));
+    })
+
+});
+
+// {/* <script>
+//             const div_table = document.querySelector("#div-table");
+//             const form_search = document.querySelector("#form-search");
+
+//             $(document).ready(function(){
+//                 $('div-table').innerHTML = GetAll();
+//             });
+
+//             form_search.onsubmit = GetUnique;
+//         </script> */}
+
 function GetTable(usuarios) {
 
     var table = `<table class='table table-hover table-bordered'>`;
