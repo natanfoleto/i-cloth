@@ -1,0 +1,16 @@
+{
+    "name": "natan/ticket-sis",
+    "description": "Sistema de recados",
+    "authors": [
+        {
+            "name": "Natan Foleto",
+            "email": "39577730+natanfoleto@users.noreply.github.com"
+        }
+    ],
+	
+    "autoload": {
+        "psr-4": {
+            "app\\":"app"
+        }
+	}
+}

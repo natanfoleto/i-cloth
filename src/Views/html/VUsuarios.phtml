@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Usuarios</title>
+
+        <link href="assets/css/VUsuarios.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="div-content">
+            <div class="card">
+                <div class="card-header">
+                    <form role="form" id="form-search" class="navbar-search" enctype="multipart/form-data">
+                        <div class="input-group">
+                            <input type="text" name="nome" class="form-control bg-light border-0" placeholder="Encontrar por...">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="div-table" class="card-body">
+                </div>
+            </div>                        
+        </div>
+
+        <script>
+            const div_error = document.querySelector("#error");
+            const div_table = document.querySelector("#div-table");
+            const form_search = document.querySelector("#form-search");
+
+            $(document).ready(function(){
+                $('div-table').innerHTML = GetAll();
+            });
+
+            form_search.onsubmit = GetUnique;
+        </script>
+    </body>
+</html>

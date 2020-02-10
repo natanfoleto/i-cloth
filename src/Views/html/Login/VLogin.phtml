@@ -1,0 +1,64 @@
+<html>
+	<head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title> iCloth </title>
+        
+        <!-- Fontes Personalizadas -->
+        <link href="VLogin.css" rel="stylesheet">
+
+        <!-- Bootstrap -->
+        <link href="../../css/lib/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Font Awesome -->
+        <script src="../../js/lib/fontawesome.min.js"></script>
+
+        <!-- Jquery -->
+        <script src="../../js/lib/jquery.min.js"></script>
+
+
+    </head>
+
+	<body>
+        <div class="container">
+            <div class="box">
+                <div class="header">
+                    <div class="img">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                </div>
+
+                <div class="body">
+                    <div class="paragrafo mt-3">
+                        <p id="title-login"> Inicie a sessão no Sistema</p>
+                    </div>
+
+                    <form role="form" id="form-login" enctype="multipart/form-data" autocomplete="off">
+                        <div class="form-group textbox">
+                            <input value="48092926816" type="text" class="form-control" id="txtCPF" name="txtCPF" maxlength="11" required>
+                            <label class="form-control-placeholder" for="txtCPF">CPF</label>
+                        </div>
+
+                        <div class="form-group textbox">
+                            <input value="143010" type="password" class="form-control" id="txtSenha" name="txtSenha" maxlength="32" required>
+                            <label class="form-control-placeholder" for="txtSenha">Senha</label>
+                        </div>
+
+                        <div class="form-group botao">
+                            <button id="btn-login" type="submit" class="btn">
+                                <img src="https://img.icons8.com/material-outlined/24/000000/right.png">
+                            </button>
+                        </div>
+                    </form> 
+                </div>
+            </div> 
+        </div>
+    </body>
+    
+    <script src="../../js/Mochila/Util.js"></script>
+    <script src="../../js/Mochila/xhttp.js"></script>
+    <script src="../../js/Controller/CLogin.js"></script>
+    
+</html>

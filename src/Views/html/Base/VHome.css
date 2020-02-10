@@ -1,0 +1,36 @@
+.navbar-brand img {
+  width: 200px;
+  height: 30px;
+}
+
+.dropdown>.dropdown-menu {
+  top: 200%;
+  transition: 0.3s all ease-in-out;
+}
+
+.dropdown:hover>.dropdown-menu {
+  display: block;
+  top: 100%;
+}
+
+.dropdown>.dropdown-toggle:active {
+  pointer-events: none;
+}
+
+.navbar {
+  padding: 10px 10px 10px 10px !important;
+  border-bottom: 1px solid #F2F2F2;
+}
+
+ul li a {
+  font-family: Arial, Helvetica, sans-serif;
+  margin-right: 10px;
+  font-size: 17px;
+}
+
+.nav-item:hover {
+  cursor: pointer;
+  border-bottom: 2px solid purple;
+  height: 41px;
+}
+
