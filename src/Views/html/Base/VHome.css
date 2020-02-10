@@ -1,5 +1,5 @@
 .navbar-brand img {
-  width: 200px;
+  width: 80px;
   height: 30px;
 }
 
@@ -30,7 +30,8 @@ ul li a {
 
 .nav-item:hover {
   cursor: pointer;
-  border-bottom: 2px solid purple;
+  border-bottom: 2px solid rgb(212, 127, 0);
   height: 41px;
 }
 
+  
