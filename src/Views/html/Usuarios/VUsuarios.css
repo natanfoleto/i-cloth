@@ -1,9 +1,22 @@
+.content-user h4, i {
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(85, 85, 85);
+}
+
+hr {
+    margin: 2 0 10 0 !important;
+}
+
 .card-header {
     background: #F8F9FA !important;
 }
 
-textarea:focus, input:focus, select:focus {
+/* textarea:focus, input:focus, select:focus, button:focus { 
     box-shadow: 0 0 0 0 !important;
     border: 0 none !important;
     outline: 0 !important;
-} 
+}  */
+
+table thead {
+    font-weight: bold;
+}

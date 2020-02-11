@@ -35,10 +35,10 @@ class CUsuario {
     public function GetUser($Object) {
         $this->ObjUsuario->Nome = $Object['nome'];
 
-        $Query = $this->Conn->GetConnection()->prepare("SELECT * FROM {$this->table} WHERE nome LIKE :nome ORDER BY nome DESC");
-        $Query->bindParam(":nome", $this->ObjUsuario->Nome, PDO::PARAM_INT);
+        $Query = $this->Conn->GetConnection()->prepare("SELECT * FROM {$this->table} WHERE nome LIKE ? ORDER BY nome DESC");
+        $Query->bindValue(1, '%' . $this->ObjUsuario->Nome . '%');
         $Query->execute();
-        return $Query->fetch();
+        return $Query->fetchAll();
 	}
 
     // public function GetAll() {

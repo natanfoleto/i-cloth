@@ -1,11 +1,23 @@
-<div id="div-content">
+<div class="container content-user">
+
+    <div class="row container">
+        <i class="fas fa-user fa-lg mr-2 mt-1"></i>
+        <h4> Listar Usuários </h4>
+    </div>
+
+    <hr>
+
+    <div class="row container mb-2 menu">
+        <button class="btn btn-success">Adicionar</button>
+    </div>
+    
     <div class="card">
         <div class="card-header">
             <form role="form" id="form-search" class="navbar-search" enctype="multipart/form-data" autocomplete="off">
                 <div class="input-group">
-                    <input type="text" id="txtNome" name="txtNome" class="form-control bg border-0" placeholder="Encontrar por..." />
+                    <input type="text" id="txtNome" name="txtNome" class="form-control bg-light border-0" placeholder="Encontrar por..." />
                     <div class="input-group-append">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn">
                             <i class="fas fa-search fa-sm"></i>
                         </button>
                     </div>
@@ -18,3 +30,6 @@
         </div>
     </div>                        
 </div>
+
+<script src="../../js/Controller/CUsuarios.js"></script>
+          
