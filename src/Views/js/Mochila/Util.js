@@ -5,6 +5,7 @@ function LoadPage(page) {
 }
 
 function LoadPageInternal(div, folder, page) {
+   $( "#" + div).empty();
    $("#" + div).load('../../html/' + folder + '/' + page + '.phtml');
 }
 

@@ -25,7 +25,7 @@ class CUsuario {
         $this->ObjUsuario->CPF = $Object['cpf'];
         $this->ObjUsuario->Senha = $Object['senha'];
 
-        $Query = $this->Conn->GetConnection()->prepare("SELECT * FROM {$this->table} WHERE cpf = :cpf AND senha = :senha");
+        $Query = $this->Conn->GetConnection()->prepare("SELECT * FROM {$this->table} WHERE cpf = :cpf AND senha = :senha AND inativo <> 'S'");
         $Query->bindParam(":cpf", $this->ObjUsuario->CPF, PDO::PARAM_STR);
         $Query->bindParam(":senha", $this->ObjUsuario->Senha, PDO::PARAM_STR);
         $Query->execute();

@@ -11,12 +11,14 @@ hr {
     background: #F8F9FA !important;
 }
 
-/* textarea:focus, input:focus, select:focus, button:focus { 
-    box-shadow: 0 0 0 0 !important;
-    border: 0 none !important;
-    outline: 0 !important;
-}  */
-
 table thead {
     font-weight: bold;
+}
+
+#tableUser tr:hover td{
+    background:rgba(245, 245, 245, 1);
+}
+
+#tableUser tr.selecionado td{
+    background:rgba(245, 245, 245, 0.75);
 }
