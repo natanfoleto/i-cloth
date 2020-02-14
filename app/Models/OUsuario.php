@@ -11,14 +11,12 @@ class OUsuario {
     public $Celular;
     public $Email;
     public $Senha;
-    public $grupoUsuario;
-    public $Inativo;
+    public $GrupoUsuario;
+    public $Ativo;
     public $usuAdd;
     public $DataHoraAdd;
     public $UsuEdt;
     public $DataHoraEdt;
-    public $AlterarSenha;
-
 
     public function __set($atribute, $value) {
         $this->$atribute = $value;

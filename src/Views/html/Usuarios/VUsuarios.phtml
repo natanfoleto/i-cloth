@@ -1,35 +1,95 @@
 <div class="container content-user">
 
     <div class="row container">
-        <i class="fas fa-user fa-lg mr-2 mt-1"></i>
-        <h4> Listar Usuários </h4>
+        <!-- <i class="fas fa-user fa-lg mr-2 mt-1"></i> -->
+        <h4 id="title"> Listar Usuários </h4>
     </div>
 
     <hr>
 
-    <div class="row container mb-2 menu">
-        <button id="btn_add" class="btn btn-success mr-1">Adicionar</button>
-        <button id="btn_edt" class="btn btn-secondary mr-1" disabled>Editar</button>
-    </div>
-    
-    <div class="card">
-        <div class="card-header">
-            <form role="form" id="form-search" class="navbar-search" enctype="multipart/form-data" autocomplete="off">
-                <div class="input-group">
-                    <input type="text" id="txtNome" name="txtNome" class="form-control bg-light border-0" placeholder="Encontrar por..." />
-                    <div class="input-group-append">
-                        <button type="submit" class="btn">
-                            <i class="fas fa-search fa-sm"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
+    <div id="table">
+        <div class="row container mb-2 menu">
+            <button id="btnAdd" class="btn btn-primary mr-1">Adicionar</button>
+            <button id="btnEdt" class="btn btn-secondary mr-1" disabled>Editar</button>
         </div>
 
-        <div id="div-table" class="card-body">
+        <div id="grid"> </div>
+    </div>
+
+    <div id="usuario" hidden>
+        <form role="form" id="form-usuario" enctype="multipart/form-data" autocomplete="off">
+            <div class="row">
+                <div class="form-group col-md-1">
+                    <label for="txtId">ID</label>
+                    <input id="txtId" name="txtId" type="text" class="form-control text-center" readonly>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="txtNome">Nome</label>
+                    <input id="txtNome" name="txtNome" type="text" class="form-control" placeholder="Nome">
+                </div>
+
+                <div class="form-group col-md-1">
+                    <label for="txtAtivo">Ativo</label>
+                    <select id="txtAtivo" name="txtAtivo" class="form-control">
+                        <option>S</option>
+                        <option>N</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="txtGrupoUsuario">Grupo de Usuário</label>
+                    <select id="txtGrupoUsuario" name="txtGrupoUsuario" class="form-control">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+            </div>
             
-        </div>
-    </div>                        
+            <div class="row">
+                <div class="form-group col-md-2">
+                    <label for="txtData">Data de Nascimento</label>
+                    <input id="txtData" name="txtData" type="date" class="form-control" value="2011-08-19">
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="txtCpf">CPF</label>
+                    <input id="txtCpf" name="txtCpf" type="text" class="form-control" placeholder="CPF">
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="txtCelular">Celular</label>
+                    <input id="txtCelular" name="txtCelular" type="text" class="form-control" placeholder="Celular">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="txtEmail">Email</label>
+                    <input id="txtEmail" name="txtEmail" type="email" class="form-control" placeholder="Email">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="txtSenha">Senha</label>
+                    <input id="txtSenha" name="txtSenha" type="password" class="form-control" placeholder="Senha">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="txtConfSenha">Confirmar Senha</label>
+                    <input id="txtConfSenha" name="txtConfSenha" type="password" class="form-control" placeholder="Confirmar Senha">
+                </div>
+            </div>
+
+            <button id="btnSalvar" type="submit" class="btn">Salvar</button>
+            <button id="btnCancelar" type="submit" class="btn">Cancelar</button>
+        </form>
+    </div>
+
+    <div class="footer"> </div>
+                            
 </div>
 
 <script src="../../js/Controller/CUsuarios.js"></script>

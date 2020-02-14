@@ -1,3 +1,14 @@
+body {
+    overflow-y: scroll !important;
+}
+
+.content-user {
+    border: 1px solid rgb(216, 216, 216);
+    border-radius: 0.25rem;
+    padding-top: 25px;
+    margin-bottom: 20px;
+}
+
 .content-user h4, i {
     font-family: Arial, Helvetica, sans-serif;
     color: rgb(85, 85, 85);
@@ -7,18 +18,107 @@ hr {
     margin: 2 0 10 0 !important;
 }
 
-.card-header {
-    background: #F8F9FA !important;
-}
-
-table thead {
-    font-weight: bold;
-}
-
 #tableUser tr:hover td{
     background:rgba(245, 245, 245, 1);
 }
 
 #tableUser tr.selecionado td{
     background:rgba(245, 245, 245, 0.75);
+}
+
+.table-position {
+    margin-top: 30px;
+}
+
+#div-table label {
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(85, 85, 85);
+}
+
+.select-table {
+    display: inline-block;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    vertical-align: middle;
+    background: #fff url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") no-repeat right 0.75rem center/8px 10px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.input-table {
+    display: inline-block;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.footer {
+    margin-bottom: 30px;
+}
+
+#form-usuario input {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    outline: 0;
+    box-shadow: none;
+}
+
+#form-usuario input:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+#form-usuario button {
+    height: 45px;
+    width: 100px;
+    background: rgb(255, 166, 0.755);
+    border-color: rgb(255, 219, 151);
+    color: white;
+    font-size: 16px;
+    outline: 0;
+    box-shadow: none;
+}
+
+#form-usuario button:hover {
+    color: rgb(255, 166, 0.755);
+    background: white;
+    border-color: rgb(255, 219, 151);
+}
+
+#form-usuario button:disabled {
+    color: orange;
+    background: white;
+    border-color: rgb(255, 219, 151);
+    cursor: not-allowed;
+}
+
+#form-usuario button i {
+    color: white;
+}
+
+table .ativo {
+    margin-top: 5px;
+    font-size: 14px;
+    color: rgb(0, 255, 0);
+}
+
+table .inativo {
+    margin-top: 5px;
+    font-size: 14px;
+    color: rgb(255, 49, 49);
 }

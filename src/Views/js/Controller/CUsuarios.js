@@ -1,46 +1,87 @@
+var usuarios;
+
 $(document).ready(() => {
 
-    $('#form-search').submit((event) => {
-        event.preventDefault();
-
-        DesabilitarEdt();
-
-        xmlHttpPost('../../../Ajax/Usuarios/GetUser', function() {
-            beforeSend(function() {
-                $('#div-table').html(`<center><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span></center>`);
-            });
-            
-            success(() => {
-                if(JSON.parse(xhttp.responseText == 404)) {
-                    $('#div-table').html(`<center><h6>Nenhum usuário foi encontrado!</h6></center>`);
-                } else {
-                    var usuarios = JSON.parse(xhttp.responseText);
-                    $('#div-table').html(GetTable(usuarios));
-                    TableSelect();
-                }
-            });
-    
-            error(() => {
-                
-            });
-    
-        }, new FormData(document.querySelector("#form-search")));
-    })
+    GetUsers();
 
 });
 
+function GetUsers() {
+    xmlHttpPost('../../../Ajax/Usuarios/GetUser', function() {
+        beforeSend(function() {
+            $('#grid').html(`<center><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span></center>`);
+        });
+        
+        success(() => {
+            if(JSON.parse(xhttp.responseText == 404)) {
+                $('#grid').html(`<center><h6>Nenhum usuário foi encontrado!</h6></center>`);
+            } else {
+                usuarios = JSON.parse(xhttp.responseText);
+                $('#grid').html(GetTable(usuarios));
+                TableSelect();
+                DataTable();
+            }
+        });
+
+        error(() => {
+            
+        });
+
+    }, null);
+}
+
+function SaveUser() {
+    xmlHttpPost('../../../Ajax/Usuarios/SaveUser', function() {
+        beforeSend(function() {
+            $('#btnSalvar').html(`<center><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i><span class="sr-only">Loading...</span></center>`);
+        });
+        
+        success(() => {
+            if(JSON.parse(xhttp.responseText == 404)) {
+                
+            } else {
+                result = JSON.parse(xhttp.responseText);
+                
+                if(result) {
+                    DisableSaveEdt();
+                    $('#btnSalvar').html("Salvo!");
+                    $('#btnCancelar').html("Voltar");
+                } else {
+                    
+                }
+            }
+        });
+
+        error(() => {
+            
+        });
+
+    }, new FormData(document.querySelector("#form-usuario")));
+}
+
 function GetTable(usuarios) {
 
-    var table = `<table id="tableUser" class='table table-hover'>`;
-    table += `<thead><tr><td class="text-center">ID</td><td>Nome</td><td>Email</td><td class="text-center">Inativo</td><td>Grupo Usuário</td></tr></thead>`;
+    var table = `<table id="tableUser" class='table table-bordered' cellspacing='0' width='100%'>`;
+    table += `<thead>`;
+    table += `<tr>`;
+    table += `<th class='th-sm text-center'>ID</th> 
+        <th class='th-sm'>Nome</th> 
+        <th class='th-sm'>CPF</th> 
+        <th class='th-sm'>Data Nasc.</th> 
+        <th class='th-sm text-center'>Ativo</th> 
+        <th class='th-sm'>Grupo</th>`;
+
+    table += `</tr>`;
+    table += `</thead>`;
     table += `<tbody>`;
 
     usuarios.forEach(function(usuario) {
         table += `<tr>`;
         table += `<td class="text-center">${usuario.idUsuario}</td>`;
         table += `<td>${usuario.nome}</td>`;
-        table += `<td>${usuario.email}</td>`;
-        table += `<td class="text-center">${usuario.inativo}</td>`;
+        table += `<td>${usuario.cpf}</td>`;
+        table += `<td>${usuario.dataNascimento}</td>`;
+        table += `<td class="text-center">${(usuario.ativo === "S") ? `<i class="fas fa-check ativo"></i>` : `<i class="fas fa-times inativo"></i>`}</td>`;
         table += `<td>${usuario.grupoUsuario}</td>`;
         table += `</tr>`;
     });
@@ -60,7 +101,7 @@ function TableSelect() {
 
         linha.addEventListener("click", function() {
             selLinha(this, false);
-            HabilitarEdt();
+            EnableEdt();
         });
     }
 
@@ -77,7 +118,14 @@ function TableSelect() {
         linha.classList.toggle("selecionado");
     }
 
-    $('#btn_edt').click(() => {
+    $('#btnAdd').click(() => {
+        $("#table").attr("hidden", 1);
+        $("#usuario").removeAttr("hidden");
+
+        LoadUserAdd();
+    })
+
+    $('#btnEdt').click(() => {
         var selecionados = tabela.getElementsByClassName("selecionado");
     
         if(selecionados.length > 1) {
@@ -89,20 +137,144 @@ function TableSelect() {
         for(var i = 0; i < selecionados.length; i++) {
             var selecionado = selecionados[i];
             selecionado = selecionado.getElementsByTagName("td");
-            dados += "ID: " + selecionado[0].innerHTML + " - Nome: " + selecionado[1].innerHTML + " - Email: " + selecionado[2].innerHTML + "\n";
         }
-        
-        console.log(dados);
+
+        $("#table").attr("hidden", 1);
+        $("#usuario").removeAttr("hidden");
+
+        LoadUserEdt(selecionado);
     })
+
+    $('#btnCancelar').click((event) => {
+        event.preventDefault();
+
+        $("#l_usuarios").trigger('click');
+    })
+
+    $('#btnSalvar').click((event) => {
+        event.preventDefault();
+
+        SaveUser();
+    })
+
+    $("input").keyup(function() {
+        EnableSaveEdt();
+    });
+
+    $("input").change(function() {
+        EnableSaveEdt();
+    });
+
+    $("select").change(function() {
+        EnableSaveEdt();
+    });
 }
 
-function HabilitarEdt() {
-    $("#btn_edt").attr("disabled", false);
-    $("#btn_edt").removeClass("btn-secondary").addClass("btn-primary");
+function LoadUserAdd() {
+    $("#title").html("Novo Usuário");
 }
 
-function DesabilitarEdt() {
-    $("#btn_edt").attr("disabled", true);
-    $("#btn_edt").removeClass("btn-primary").addClass("btn-secondary");
+function LoadUserEdt(usuario) {
+    for (i = 0; i < usuarios.length; i++) {
+        if(usuarios[i].idUsuario === usuario[0].textContent) {
+            PopularFields(usuarios[i]);
+            return false;
+        }
+    }
+}
+
+function BlockEdt() {
+    $("input").attr("disabled", 1);
+    $("select").attr("disabled", 1);
+    $("#btnSalvar").attr("disabled", 1);
+    $("#btnCancelar").html("Voltar");
+}
+
+function PopularFields(usuario) {
+    if(usuario.ativo === "N") {     
+        $("#title").html(usuario.nome + " [Inativo]");
+        BlockEdt();
+    } else {
+        $("#title").html(usuario.nome);
+    } 
+
+    $("#txtId").val(usuario.idUsuario);
+    $("#txtNome").val(usuario.nome);
+    $("#txtAtivo").val((usuario.ativo === "S") ? "S" : "N");
+    $("#txtGrupoUsuario").val(usuario.grupoUsuario);
+    $("#txtData").val(usuario.dataNascimento);
+    $("#txtCpf").val(usuario.cpf);
+    $("#txtCelular").val(usuario.celular);
+    $("#txtEmail").val(usuario.email);
+    $("#txtSenha").val(usuario.senha);
+
+    DisableSaveEdt();
+}
+
+function EnableSaveEdt() {
+    $("#btnSalvar").removeAttr("disabled");
+    $("#btnSalvar").attr("disabled", false);
+    $("#btnSalvar").html("Salvar");
+    $("#btnCancelar").html("Cancelar");
+}
+
+function DisableSaveEdt() {
+    $("#btnSalvar").removeAttr("disabled");
+    $("#btnSalvar").attr("disabled", true);
+}
+
+function EnableEdt() {
+    $("#btnEdt").attr("disabled", false);
+    $("#btnEdt").removeClass("btn-secondary").addClass("btn-success");
+}
+
+function DisableEdt() {
+    $("#btnEdt").attr("disabled", true);
+    $("#btnEdt").removeClass("btn-success").addClass("btn-secondary");
+}
+
+function DataTable() {
+    $('#tableUser').DataTable({
+        "language": {
+            "sEmptyTable": "Nenhum registro encontrado",
+            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "_MENU_ resultados por página",
+            "sLoadingRecords": "Carregando...",
+            "sProcessing": "Processando...",
+            "sZeroRecords": "Nenhum registro encontrado",
+            "sSearch": "Buscar Usuário",
+            "oPaginate": {
+            "sNext": "Próximo",
+            "sPrevious": "Anterior",
+            "sFirst": "Primeiro",
+            "sLast": "Último"
+            },
+            "oAria": {
+                "sSortAscending": ": Ordenar colunas de forma ascendente",
+                "sSortDescending": ": Ordenar colunas de forma descendente"
+            },
+            "select": {
+                "rows": {
+                    "_": "Selecionado %d linhas",
+                    "0": "Nenhuma linha selecionada",
+                    "1": "Selecionado 1 linha"
+                }
+            }
+        }
+    });
+    
+    AddStyleTable();
+}
+
+function AddStyleTable() {
+    $("#tableUser_wrapper").addClass("table-position");
+    $("select").addClass("select-table");
+    $("input").addClass("input-table");
+    $("#tableUser_paginate").addClass("pagination-table");
+    $("#tableUser").removeClass("dataTable no-footer");
 }
 

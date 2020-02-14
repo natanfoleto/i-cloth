@@ -25,7 +25,7 @@ class CUsuario {
         $this->ObjUsuario->CPF = $Object['cpf'];
         $this->ObjUsuario->Senha = $Object['senha'];
 
-        $Query = $this->Conn->GetConnection()->prepare("SELECT * FROM {$this->table} WHERE cpf = :cpf AND senha = :senha AND inativo <> 'S'");
+        $Query = $this->Conn->GetConnection()->prepare("SELECT * FROM {$this->table} WHERE cpf = :cpf AND senha = :senha AND ativo <> 'N'");
         $Query->bindParam(":cpf", $this->ObjUsuario->CPF, PDO::PARAM_STR);
         $Query->bindParam(":senha", $this->ObjUsuario->Senha, PDO::PARAM_STR);
         $Query->execute();
@@ -39,17 +39,53 @@ class CUsuario {
         $Query->bindValue(1, '%' . $this->ObjUsuario->Nome . '%');
         $Query->execute();
         return $Query->fetchAll();
-	}
+    }
+    
+    public function InsertUser($Object) {
+        $this->ObjUsuario->Nome = $Object['nome'];
 
-    // public function GetAll() {
-    //     try {
-    //         $Query = $this->Conn->GetConnection()->prepare("SELECT * FROM `usuario`;");
-    //         $Query->execute();
-    //         return $Query->fetchAll();
-    //     } catch(PDOException $ex) {
-    //         return 'Erro: '.$ex->getMessage();
-    //     }
-    // }
+        $Query = $this->Conn->GetConnection()->prepare("SELECT * FROM {$this->table} WHERE nome LIKE ? ORDER BY nome DESC");
+        $Query->bindValue(1, '%' . $this->ObjUsuario->Nome . '%');
+        $Query->execute();
+        return $Query->fetchAll();
+    }
+
+    public function UpdateUser($Object) {
+        $this->ObjUsuario->idUsuario = $Object['idUsuario'];
+        $this->ObjUsuario->Nome = $this->ObjFunc->TratarCaracter($Object['nome'], 1);
+        $this->ObjUsuario->DataNascimento = $Object['dataNascimento'];
+        $this->ObjUsuario->CPF = $Object['cpf'];
+        $this->ObjUsuario->Celular = $Object['celular'];
+        $this->ObjUsuario->Email = $Object['email'];
+        $this->ObjUsuario->Senha = $Object['senha'];
+        $this->ObjUsuario->GrupoUsuario = $Object['grupoUsuario'];
+        $this->ObjUsuario->Ativo = $Object['ativo'];
+        $this->ObjUsuario->UsuEdt = $Object['usuEdt'];
+        $this->ObjUsuario->DataHoraEdt = $this->ObjFunc->DataAtual(2);
+        
+        $Query = $this->Conn->GetConnection()->prepare("UPDATE {$this->table} SET `nome` = :nome, 
+            `dataNascimento` = :dataNascimento, `cpf` = :cpf, `celular` = :celular, `email` = :email,
+            `senha` = :senha, `grupoUsuario` = :grupoUsuario, `ativo` = :ativo, `usuEdt` = :usuEdt,
+            `dataHoraEdt` = :dataHoraEdt WHERE `idUsuario` = :idUsuario;");
+
+        $Query->bindParam(":idUsuario", $this->ObjUsuario->idUsuario, PDO::PARAM_INT);
+        $Query->bindParam(":nome", $this->ObjUsuario->Nome, PDO::PARAM_STR);
+        $Query->bindParam(":dataNascimento", $this->ObjUsuario->DataNascimento, PDO::PARAM_STR);
+        $Query->bindParam(":cpf", $this->ObjUsuario->CPF, PDO::PARAM_STR);
+        $Query->bindParam(":celular", $this->ObjUsuario->Celular, PDO::PARAM_STR);
+        $Query->bindParam(":email", $this->ObjUsuario->Email, PDO::PARAM_STR);
+        $Query->bindParam(":senha", $this->ObjUsuario->Senha, PDO::PARAM_STR);
+        $Query->bindParam(":grupoUsuario", $this->ObjUsuario->GrupoUsuario, PDO::PARAM_INT);
+        $Query->bindParam(":ativo", $this->ObjUsuario->Ativo, PDO::PARAM_STR);
+        $Query->bindParam(":usuEdt", $this->ObjUsuario->UsuEdt, PDO::PARAM_INT);
+        $Query->bindParam(":dataHoraEdt", $this->ObjUsuario->DataHoraEdt, PDO::PARAM_STR);
+
+        if($Query->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     // public function QueryInsert($Object) { 
     //     try {
@@ -74,51 +110,7 @@ class CUsuario {
     //     } catch(PDOException $ex) {
     //         return 'Erro: '.$ex->getMessage();
     //     }
-    // }
-
-    // public function QueryUpdate($Object) {
-    //     try {
-    //         $this->ObjUsuario->idUsuario = $this->ObjFunc->Base64($Object['idUsuario'], 2);
-    //         $this->ObjUsuario->Nome = $this->ObjFunc->TratarCaracter($Object['nome'], 1);
-    //         $this->ObjUsuario->Email = $Object['email'];
-    //         $this->ObjUsuario->Ativo = $Object['ativo'];
-    //         $this->ObjUsuario->GrupoUsuario = $Object['grupoUsuario'];
-
-    //         $Query = $this->Conn->GetConnection()->prepare("UPDATE `usuarios` SET  `nome` = :Nome, `email` = :Email, `ativo` = :Ativo, `GrupoUsuario` = :grupoUsuario WHERE `idUsuario` = :IdUsuario;");
-    //         $Query->bindParam(":IdUsuario", $this->ObjUsuario->idUsuairo, PDO::PARAM_INT);
-    //         $Query->bindParam(":Nome", $this->ObjUsuario->Nome, PDO::PARAM_STR);
-    //         $Query->bindParam(":Email", $this->ObjUsuario->Email, PDO::PARAM_STR);
-    //         $Query->bindParam(":Ativo", $this->ObjUsuario->Ativo, PDO::PARAM_STR);
-    //         $Query->bindParam(":GrupoUsuario", $this->ObjUsuario->GrupoUsuario, PDO::PARAM_INT);
-
-    //         if($Query->execute()) {
-    //             return 'OK';
-    //         } else {
-    //             return 'ERRO';
-    //         }
-    //     } catch(PDOException $ex) {
-    //         return 'Erro: '.$ex->getMessage();
-    //     }
-    // }
-
-    // public function QueryDelete($Id) {
-    //     try {
-    //         $this->ObjUsuario->idUsuario = $this->ObjFunc->Base64($Id, 2);
-
-    //         $Query = $this->Conn->GetConnection()->prepare("DELETE FROM `usuarios` WHERE `idUsuario` = :Id;");
-    //         $Query->bindParam(":Id", $this->ObjUsuario->idUsuario, PDO::PARAM_INT);
-
-    //         if($Query->execute()) {
-    //             return 'OK';
-    //         } else {
-    //             return 'ERRO';
-    //         }
-    //     } catch(PDOException $ex) {
-    //         return 'Erro: '.$ex->getMessage();
-    //     }
-    // }
-
-    
+    // }   
 }
 
 ?>
