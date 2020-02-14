@@ -42,12 +42,14 @@ function SaveUser() {
             } else {
                 result = JSON.parse(xhttp.responseText);
                 
-                if(result) {
+                if(result === "UpdateTrue") {
                     DisableSaveEdt();
                     $('#btnSalvar').html("Salvo!");
                     $('#btnCancelar').html("Voltar");
+                } else if (result === "InsertTrue") {
+                    $("#l_usuarios").trigger('click');
                 } else {
-                    
+
                 }
             }
         });

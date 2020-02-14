@@ -42,12 +42,42 @@ class CUsuario {
     }
     
     public function InsertUser($Object) {
-        $this->ObjUsuario->Nome = $Object['nome'];
+        $this->ObjUsuario->Nome = $this->ObjFunc->TratarCaracter($Object['nome'], 1);
+        $this->ObjUsuario->DataNascimento = $Object['dataNascimento'];
+        $this->ObjUsuario->CPF = $Object['cpf'];
+        $this->ObjUsuario->Celular = $Object['celular'];
+        $this->ObjUsuario->Email = $Object['email'];
+        $this->ObjUsuario->Senha = $Object['senha'];
+        $this->ObjUsuario->GrupoUsuario = $Object['grupoUsuario'];
+        $this->ObjUsuario->Ativo = $Object['ativo'];
+        $this->ObjUsuario->usuAdd = $Object['usuAdd'];
+        $this->ObjUsuario->DataHoraAdd = $this->ObjFunc->DataAtual(2);
+        $this->ObjUsuario->UsuEdt = $Object['usuEdt'];
+        $this->ObjUsuario->DataHoraEdt = $this->ObjFunc->DataAtual(2);
 
-        $Query = $this->Conn->GetConnection()->prepare("SELECT * FROM {$this->table} WHERE nome LIKE ? ORDER BY nome DESC");
-        $Query->bindValue(1, '%' . $this->ObjUsuario->Nome . '%');
-        $Query->execute();
-        return $Query->fetchAll();
+        $Query = $this->Conn->GetConnection()->prepare("INSERT INTO {$this->table} (`nome`, `dataNascimento`, `cpf`, `celular`, 
+            `email`, `senha`, `grupoUsuario`, `ativo`, `usuAdd`, `dataHoraAdd`, `usuEdt`, `dataHoraEdt` ) VALUES 
+            (:nome, :dataNascimento, :cpf, :celular, :email, :senha, :grupoUsuario, :ativo, :usuAdd, :dataHoraAdd, 
+            :usuEdt, :dataHoraEdt);");
+
+        $Query->bindParam(":nome", $this->ObjUsuario->Nome, PDO::PARAM_STR);
+        $Query->bindParam(":dataNascimento", $this->ObjUsuario->DataNascimento, PDO::PARAM_STR);
+        $Query->bindParam(":cpf", $this->ObjUsuario->CPF, PDO::PARAM_STR);
+        $Query->bindParam(":celular", $this->ObjUsuario->Celular, PDO::PARAM_STR);
+        $Query->bindParam(":email", $this->ObjUsuario->Email, PDO::PARAM_STR);
+        $Query->bindParam(":senha", $this->ObjUsuario->Senha, PDO::PARAM_STR);
+        $Query->bindParam(":grupoUsuario", $this->ObjUsuario->GrupoUsuario, PDO::PARAM_INT);
+        $Query->bindParam(":ativo", $this->ObjUsuario->Ativo, PDO::PARAM_STR);
+        $Query->bindParam(":usuAdd", $this->ObjUsuario->UsuEdt, PDO::PARAM_INT);
+        $Query->bindParam(":dataHoraAdd", $this->ObjUsuario->DataHoraEdt, PDO::PARAM_STR);
+        $Query->bindParam(":usuEdt", $this->ObjUsuario->UsuEdt, PDO::PARAM_INT);
+        $Query->bindParam(":dataHoraEdt", $this->ObjUsuario->DataHoraEdt, PDO::PARAM_STR);
+
+        if($Query->execute()) {
+            return "InsertTrue";
+        } else {
+            return false;
+        }
     }
 
     public function UpdateUser($Object) {
@@ -81,7 +111,7 @@ class CUsuario {
         $Query->bindParam(":dataHoraEdt", $this->ObjUsuario->DataHoraEdt, PDO::PARAM_STR);
 
         if($Query->execute()) {
-            return true;
+            return "UpdateTrue";
         } else {
             return false;
         }

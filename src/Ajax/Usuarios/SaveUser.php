@@ -16,14 +16,17 @@ $object = array (
 	"senha" => filter_input(INPUT_POST, 'txtSenha', FILTER_SANITIZE_STRING),
 	"grupoUsuario" => filter_input(INPUT_POST, 'txtGrupoUsuario', FILTER_SANITIZE_NUMBER_INT),
 	"ativo" => $_POST['txtAtivo'],
+	"usuAdd" => 1,
 	"usuEdt" => 1
 );
 
-$result = $usuario->UpdateUser($object);
-
-if (!$result) {
-	echo false;
+if($_POST['txtId'] === "") {
+	$result = $usuario->InsertUser($object);
 } else {
-	echo json_encode($result);
-	// $session->CreateSession('Login', $result['nome']);
+	$result = $usuario->UpdateUser($object);
 }
+
+if (!$result)
+	return false;
+else 
+	echo json_encode($result);
