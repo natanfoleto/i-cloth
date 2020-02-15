@@ -206,6 +206,7 @@ function CheckPassword() {
 
 function LoadUserAdd() {
     $("#title").html("Novo Usuário");
+    $("#txtNome").focus();
 }
 
 function LoadUserEdt(usuario) {
@@ -241,7 +242,7 @@ function PopularFields(usuario) {
     $("#txtCelular").val(usuario.celular);
     $("#txtEmail").val(usuario.email);
     $("#txtSenha").val(usuario.senha);
-    $("#txtSenha").attr("disabled", 1);
+    $("#txtSenha").attr("readonly", 1);
 
     DisableSaveEdt();
 }
@@ -271,7 +272,7 @@ function DisableEdt() {
 function DataTable() {
     $('#tableUser').DataTable({
         "language": {
-            "sEmptyTable": "Nenhum registro encontrado",
+            "sEmptyTable": "Nenhum usuário foi encontrado!",
             "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
             "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
             "sInfoFiltered": "(Filtrados de _MAX_ registros)",
@@ -280,7 +281,7 @@ function DataTable() {
             "sLengthMenu": "_MENU_ resultados por página",
             "sLoadingRecords": "Carregando...",
             "sProcessing": "Processando...",
-            "sZeroRecords": "Nenhum registro encontrado",
+            "sZeroRecords": "Nenhum usuário foi encontrado!",
             "sSearch": "Buscar Usuário",
             "oPaginate": {
             "sNext": "Próximo",
