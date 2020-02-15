@@ -1,9 +1,47 @@
 var usuarios;
 
+var campos = [
+    "txtNome",
+    "txtCpf",
+    "txtCelular",
+    "txtEmail",
+    "txtSenha",
+    "txtConfSenha"
+]
+
 $(document).ready(() => {
 
     GetUsers();
 
+    $('#btnSalvar').click((event) => {
+        event.preventDefault();
+
+        if(!CheckFields()) {
+            alert("Você precisa preencher todos os campos!");
+        } else if(!CheckPassword()){
+            alert("A confirmação da senha esta errada!");
+        } else {
+            SaveUser();
+        }
+    })
+
+    $('#btnCancelar').click((event) => {
+        event.preventDefault();
+
+        $("#l_usuarios").trigger('click');
+    })
+
+    $("input").keyup(function() {
+        EnableSaveEdt();
+    });
+
+    $("input").change(function() {
+        EnableSaveEdt();
+    });
+
+    $("select").change(function() {
+        EnableSaveEdt();
+    });
 });
 
 function GetUsers() {
@@ -31,6 +69,7 @@ function GetUsers() {
 }
 
 function SaveUser() {
+
     xmlHttpPost('../../../Ajax/Usuarios/SaveUser', function() {
         beforeSend(function() {
             $('#btnSalvar').html(`<center><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i><span class="sr-only">Loading...</span></center>`);
@@ -147,29 +186,22 @@ function TableSelect() {
         LoadUserEdt(selecionado);
     })
 
-    $('#btnCancelar').click((event) => {
-        event.preventDefault();
+}
 
-        $("#l_usuarios").trigger('click');
-    })
+function CheckFields() {
+    for(i = 0; i < campos.length; i++) {
+        if($("#" + campos[i]).val() === "")
+            return false;
+    }
 
-    $('#btnSalvar').click((event) => {
-        event.preventDefault();
+    return true;
+}
 
-        SaveUser();
-    })
-
-    $("input").keyup(function() {
-        EnableSaveEdt();
-    });
-
-    $("input").change(function() {
-        EnableSaveEdt();
-    });
-
-    $("select").change(function() {
-        EnableSaveEdt();
-    });
+function CheckPassword() {
+    if($("#txtSenha").val() != $("#txtConfSenha").val())
+        return false;
+    else 
+        return true;
 }
 
 function LoadUserAdd() {
@@ -209,6 +241,7 @@ function PopularFields(usuario) {
     $("#txtCelular").val(usuario.celular);
     $("#txtEmail").val(usuario.email);
     $("#txtSenha").val(usuario.senha);
+    $("#txtSenha").attr("disabled", 1);
 
     DisableSaveEdt();
 }
