@@ -11,8 +11,7 @@ var campos = [
 
 $(document).ready(() => {
 
-    GetGroupUsers();
-    GetUsers();
+    OnLoad();
 
     $('#btnSalvar').click((event) => {
         event.preventDefault();
@@ -45,50 +44,50 @@ $(document).ready(() => {
     });
 });
 
-function GetGroupUsers() {
-    xmlHttpPost('../../../Ajax/Grupo Usuarios/GetGroupUser', function() {
-        beforeSend(function() {
-
-        });
-        
-        success(() => {
-            if(JSON.parse(xhttp.responseText == 404)) {
-                alert('Nenhum Grupo de Usuário Cadastrado!')
-            } else {
-                gruposUsuario = JSON.parse(xhttp.responseText);
-                console.log(gruposUsuario);
-            }
-        });
-
-        error(() => {
-            
-        });
-
-    }, null);
+async function OnLoad() {
+    const responseGetUsers = await GetUsers();
+    console.log(responseGetUsers);
+    const responseGetGroupUsers = await GetGroupUsers();
+    console.log(responseGetGroupUsers);
 }
 
 function GetUsers() {
-    xmlHttpPost('../../../Ajax/Usuarios/GetUser', function() {
-        beforeSend(function() {
-            $('#grid').html(`<center><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span></center>`);
-        });
-        
-        success(() => {
-            if(JSON.parse(xhttp.responseText == 404)) {
-                $('#grid').html(`<center><h6>Nenhum usuário foi encontrado!</h6></center>`);
-            } else {
-                usuarios = JSON.parse(xhttp.responseText);
-                $('#grid').html(GetTable(usuarios));
-                TableSelect();
-                DataTable();
-            }
-        });
-
-        error(() => {
+    return new Promise((resolve, reject) => {
+        xmlHttpPost('../../../Ajax/Usuarios/GetUser', function() {
+            beforeSend(function() {
+                $('#grid').html(`<center><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span></center>`);
+            });
             
-        });
+            success(() => {
+                if(JSON.parse(xhttp.responseText == 404)) {
+                    reject($('#grid').html(`<center><h6>Nenhum usuário foi encontrado!</h6></center>`));
+                } else {
+                    usuarios = JSON.parse(xhttp.responseText);
+                    $('#grid').html(GetTable(usuarios));
+                    TableSelect();   
+                    DataTable();
 
-    }, null);
+                    resolve(usuarios);
+                }
+            });
+        }, null);
+    });
+}
+
+function GetGroupUsers() {
+    return new Promise((resolve, reject) => {
+        xmlHttpPost('../../../Ajax/Grupo Usuarios/GetGroupUser', function() {
+            success(() => {
+                if(JSON.parse(xhttp.responseText == 404)) {
+                    reject(alert('Nenhum Grupo de Usuário Cadastrado!'));
+                } else {
+                    gruposUsuario = JSON.parse(xhttp.responseText);
+
+                    resolve(gruposUsuario);
+                }
+            });
+        }, null);
+    });
 }
 
 function SaveUser() {
@@ -336,4 +335,3 @@ function AddStyleTable() {
     $("#tableUser_paginate").addClass("pagination-table");
     $("#tableUser").removeClass("dataTable no-footer");
 }
-
