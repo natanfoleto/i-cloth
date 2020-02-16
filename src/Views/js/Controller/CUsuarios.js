@@ -1,4 +1,5 @@
 var usuarios;
+var gruposUsuario;
 
 var campos = [
     "txtNome",
@@ -45,10 +46,25 @@ $(document).ready(() => {
 });
 
 async function OnLoad() {
-    const responseGetUsers = await GetUsers();
-    console.log(responseGetUsers);
-    const responseGetGroupUsers = await GetGroupUsers();
-    console.log(responseGetGroupUsers);
+    gruposUsuarios = await GetGroupUsers();
+    usuarios = await GetUsers();
+}
+
+function GetGroupUsers() {
+    return new Promise((resolve, reject) => {
+        xmlHttpPost('../../../Ajax/Grupo Usuarios/GetGroupUser', function() {
+            success(() => {
+                if(JSON.parse(xhttp.responseText == 404)) {
+                    reject($('#table').html(`<center><h6>Nenhum grupo de usuário foi encontrado!</h6></center>`));
+                } else {
+                    gruposUsuario = JSON.parse(xhttp.responseText);
+                    PopuplarSelect(gruposUsuario);
+
+                    resolve(gruposUsuario);
+                }
+            });
+        }, null);
+    });
 }
 
 function GetUsers() {
@@ -63,27 +79,11 @@ function GetUsers() {
                     reject($('#grid').html(`<center><h6>Nenhum usuário foi encontrado!</h6></center>`));
                 } else {
                     usuarios = JSON.parse(xhttp.responseText);
-                    $('#grid').html(GetTable(usuarios));
+                    $('#grid').html(GetTable(usuarios, gruposUsuario));
                     TableSelect();   
                     DataTable();
 
                     resolve(usuarios);
-                }
-            });
-        }, null);
-    });
-}
-
-function GetGroupUsers() {
-    return new Promise((resolve, reject) => {
-        xmlHttpPost('../../../Ajax/Grupo Usuarios/GetGroupUser', function() {
-            success(() => {
-                if(JSON.parse(xhttp.responseText == 404)) {
-                    reject(alert('Nenhum Grupo de Usuário Cadastrado!'));
-                } else {
-                    gruposUsuario = JSON.parse(xhttp.responseText);
-
-                    resolve(gruposUsuario);
                 }
             });
         }, null);
@@ -122,7 +122,16 @@ function SaveUser() {
     }, new FormData(document.querySelector("#form-usuario")));
 }
 
-function GetTable(usuarios) {
+function PopuplarSelect(gruposUsuario) {
+    var selectbox = $('#txtGrupoUsuario');
+    selectbox.find('option').remove();
+
+    gruposUsuario.forEach(grupoUsuario => {
+        $('<option>').val(grupoUsuario.idGrupoUsuario).text(grupoUsuario.nome).appendTo(selectbox);
+    });
+}
+
+function GetTable(usuarios, gruposUsuario) {
 
     var table = `<table id="tableUser" class='table table-bordered' cellspacing='0' width='100%'>`;
     table += `<thead>`;
@@ -145,7 +154,13 @@ function GetTable(usuarios) {
         table += `<td>${usuario.cpf}</td>`;
         table += `<td>${usuario.dataNascimento}</td>`;
         table += `<td class="text-center">${(usuario.ativo === "S") ? `<i class="fas fa-check ativo"></i>` : `<i class="fas fa-times inativo"></i>`}</td>`;
-        table += `<td>${usuario.grupoUsuario}</td>`;
+
+        gruposUsuario.forEach(grupoUsuario => {
+            if(grupoUsuario.idGrupoUsuario === usuario.grupoUsuario) {
+                table += `<td>${grupoUsuario.nome}</td>`;
+            }
+        });
+
         table += `</tr>`;
     });
 
@@ -195,8 +210,6 @@ function TableSelect() {
             console.log("Selecione algum registro para editar!");
         }
         
-        var dados = "";
-        
         for(var i = 0; i < selecionados.length; i++) {
             var selecionado = selecionados[i];
             selecionado = selecionado.getElementsByTagName("td");
@@ -234,7 +247,7 @@ function LoadUserAdd() {
 function LoadUserEdt(usuario) {
     for (i = 0; i < usuarios.length; i++) {
         if(usuarios[i].idUsuario === usuario[0].textContent) {
-            PopularFields(usuarios[i]);
+            PopularFields(usuarios[i], gruposUsuario);
             return false;
         }
     }
@@ -247,7 +260,7 @@ function BlockEdt() {
     $("#btnCancelar").html("Voltar");
 }
 
-function PopularFields(usuario) {
+function PopularFields(usuario, gruposUsuario) {
     if(usuario.ativo === "N") {     
         $("#title").html(usuario.nome + " [Inativo]");
         BlockEdt();
@@ -258,7 +271,13 @@ function PopularFields(usuario) {
     $("#txtId").val(usuario.idUsuario);
     $("#txtNome").val(usuario.nome);
     $("#txtAtivo").val((usuario.ativo === "S") ? "S" : "N");
-    $("#txtGrupoUsuario").val(usuario.grupoUsuario);
+
+    gruposUsuario.forEach(grupoUsuario => {
+        if(grupoUsuario.idGrupoUsuario === usuario.grupoUsuario) {
+            $("#txtGrupoUsuario").val($('option:contains(' + grupoUsuario.nome + ')').val());
+        }
+    });
+
     $("#txtData").val(usuario.dataNascimento);
     $("#txtCpf").val(usuario.cpf);
     $("#txtCelular").val(usuario.celular);
