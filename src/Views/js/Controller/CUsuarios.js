@@ -11,6 +11,7 @@ var campos = [
 
 $(document).ready(() => {
 
+    GetGroupUsers();
     GetUsers();
 
     $('#btnSalvar').click((event) => {
@@ -43,6 +44,28 @@ $(document).ready(() => {
         EnableSaveEdt();
     });
 });
+
+function GetGroupUsers() {
+    xmlHttpPost('../../../Ajax/Grupo Usuarios/GetGroupUser', function() {
+        beforeSend(function() {
+
+        });
+        
+        success(() => {
+            if(JSON.parse(xhttp.responseText == 404)) {
+                alert('Nenhum Grupo de Usuário Cadastrado!')
+            } else {
+                gruposUsuario = JSON.parse(xhttp.responseText);
+                console.log(gruposUsuario);
+            }
+        });
+
+        error(() => {
+            
+        });
+
+    }, null);
+}
 
 function GetUsers() {
     xmlHttpPost('../../../Ajax/Usuarios/GetUser', function() {

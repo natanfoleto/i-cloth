@@ -2,15 +2,15 @@
 
 require "../../../config.php";
 
-use app\Controllers\CUsuario;
+use app\Controllers\CGrupoUsuario;
 
-$usuario = new CUsuario;
+$grupoUsuario = new CGrupoUsuario;
 
-$object = array(
+$object = array (
 	"nome" => filter_input(INPUT_POST, 'txtNome', FILTER_SANITIZE_STRING),
 );
 
-$result = $usuario->GetUser($object);
+$result = $grupoUsuario->GetGroupUser($object);
 
 if (!$result) {
 	echo 404;

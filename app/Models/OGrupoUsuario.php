@@ -2,17 +2,12 @@
 
 namespace app\Models;
 
-class OUsuario {
+class OGrupoUsuario {
 
-    public $idUsuario;
+    public $idGrupoUsuario;
     public $Nome;
-    public $DataNascimento;
-    public $CPF;
-    public $Celular;
-    public $Email;
-    public $Senha;
-    public $GrupoUsuario;
     public $Ativo;
+    public $Obs;
     public $usuAdd;
     public $DataHoraAdd;
     public $UsuEdt;
