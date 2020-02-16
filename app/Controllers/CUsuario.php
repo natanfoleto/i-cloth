@@ -42,7 +42,7 @@ class CUsuario {
     }
     
     public function InsertUser($Object) {
-        $this->ObjUsuario->Nome = $this->ObjFunc->TratarCaracter($Object['nome'], 1);
+        $this->ObjUsuario->Nome = $Object['nome'];
         $this->ObjUsuario->DataNascimento = $Object['dataNascimento'];
         $this->ObjUsuario->CPF = $Object['cpf'];
         $this->ObjUsuario->Celular = $Object['celular'];
@@ -82,7 +82,7 @@ class CUsuario {
 
     public function UpdateUser($Object) {
         $this->ObjUsuario->idUsuario = $Object['idUsuario'];
-        $this->ObjUsuario->Nome = $this->ObjFunc->TratarCaracter($Object['nome'], 1);
+        $this->ObjUsuario->Nome = $Object['nome'];
         $this->ObjUsuario->DataNascimento = $Object['dataNascimento'];
         $this->ObjUsuario->CPF = $Object['cpf'];
         $this->ObjUsuario->Celular = $Object['celular'];

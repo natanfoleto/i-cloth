@@ -88,7 +88,7 @@ function SaveUser() {
                 } else if (result === "InsertTrue") {
                     $("#l_usuarios").trigger('click');
                 } else {
-
+                    alert("Algo deu errado, verifique o código!");
                 }
             }
         });

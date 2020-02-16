@@ -14,7 +14,7 @@ $object = array (
 	"celular" => filter_input(INPUT_POST, 'txtCelular', FILTER_SANITIZE_STRING),
 	"email" => filter_input(INPUT_POST, 'txtEmail', FILTER_SANITIZE_EMAIL),
 	"senha" => filter_input(INPUT_POST, 'txtSenha', FILTER_SANITIZE_STRING),
-	"grupoUsuario" => filter_input(INPUT_POST, 'txtGrupoUsuario', FILTER_SANITIZE_NUMBER_INT),
+	"grupoUsuario" => filter_input(INPUT_POST, 'txtGrupoUsuario', FILTER_SANITIZE_NUMBER_INT),	
 	"ativo" => $_POST['txtAtivo'],
 	"usuAdd" => 1,
 	"usuEdt" => 1
@@ -26,7 +26,4 @@ if($_POST['txtId'] === "") {
 	$result = $usuario->UpdateUser($object);
 }
 
-if (!$result)
-	return false;
-else 
-	echo json_encode($result);
+echo json_encode($result);
