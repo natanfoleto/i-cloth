@@ -55,7 +55,9 @@ function GetGroupUsers() {
         xmlHttpPost('../../../Ajax/Grupo Usuarios/GetGroupUser', function() {
             success(() => {
                 if(JSON.parse(xhttp.responseText == 404)) {
-                    reject($('#table').html(`<center><h6>Nenhum grupo de usuário foi encontrado!</h6></center>`));
+                    reject($('#table').html(
+                        `<center><h6>Nenhum grupo de usuário foi encontrado!</h6></center>`
+                    ));
                 } else {
                     gruposUsuario = JSON.parse(xhttp.responseText);
                     PopuplarSelect(gruposUsuario);
@@ -71,12 +73,17 @@ function GetUsers() {
     return new Promise((resolve, reject) => {
         xmlHttpPost('../../../Ajax/Usuarios/GetUser', function() {
             beforeSend(function() {
-                $('#grid').html(`<center><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span></center>`);
+                $('#grid').html(
+                    `<center><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">
+                    Loading...</span></center>`
+                );
             });
             
             success(() => {
                 if(JSON.parse(xhttp.responseText == 404)) {
-                    reject($('#grid').html(`<center><h6>Nenhum usuário foi encontrado!</h6></center>`));
+                    reject($('#grid').html(
+                        `<center><h6>Nenhum usuário foi encontrado!</h6></center>`
+                    ));
                 } else {
                     usuarios = JSON.parse(xhttp.responseText);
                     $('#grid').html(GetTable(usuarios, gruposUsuario));
@@ -94,7 +101,10 @@ function SaveUser() {
 
     xmlHttpPost('../../../Ajax/Usuarios/SaveUser', function() {
         beforeSend(function() {
-            $('#btnSalvar').html(`<center><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i><span class="sr-only">Loading...</span></center>`);
+            $('#btnSalvar').html(
+                `<center><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i><span class="sr-only">
+                Loading...</span></center>`
+            );
         });
         
         success(() => {
@@ -153,7 +163,9 @@ function GetTable(usuarios, gruposUsuario) {
         table += `<td>${usuario.nome}</td>`;
         table += `<td>${usuario.cpf}</td>`;
         table += `<td>${usuario.dataNascimento}</td>`;
-        table += `<td class="text-center">${(usuario.ativo === "S") ? `<i class="fas fa-check ativo"></i>` : `<i class="fas fa-times inativo"></i>`}</td>`;
+        table += `<td class="text-center">${(usuario.ativo === "S") ? 
+        `<i class="fas fa-check ativo"></i>` : 
+        `<i class="fas fa-times inativo"></i>`}</td>`;
 
         gruposUsuario.forEach(grupoUsuario => {
             if(grupoUsuario.idGrupoUsuario === usuario.grupoUsuario) {
