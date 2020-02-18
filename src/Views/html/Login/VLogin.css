@@ -13,6 +13,11 @@ body {
 
 .box {
     border: 1px solid #C9C9C9;
+    width: 25vw;
+    min-width:450px;
+    height: 65vh;
+    min-height:575px;
+    max-height:575px;
 }
 
 .header {
@@ -20,8 +25,9 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 25vw;
     height: 15vh;
+    min-height:135px;
+    max-height:135px;
     background: #F2F2F2;
 }
 
@@ -45,8 +51,9 @@ body {
 }
 
 .body {
-    width: 25vw;
     height: 50vh;
+    min-height:440px;
+    max-height:440px;
     display: flex;
     flex-direction: column;
     justify-content: center;

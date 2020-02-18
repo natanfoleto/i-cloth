@@ -1,28 +1,13 @@
+.navbar {
+  margin-bottom: 25px;
+  position: absolute;
+  z-index: 9999; 
+}
+
 .navbar-brand img {
   width: 80px;
   height: 30px;
-}
-
-.dropdown>.dropdown-menu {
-  top: 200%;
-  transition: 0.3s all ease-in-out;
-}
-
-.dropdown:hover>.dropdown-menu {
-  display: block;
-  top: 100%;
-}
-
-.dropdown>.dropdown-toggle:active {
-  pointer-events: none;
-}
-
-.navbar {
-  padding: 10px 10px 10px 10px !important;
-  border-bottom: 1px solid #F2F2F2;
-  margin-bottom: 20px;
-  position: absolute;
-  z-index: 9999; /* número máximo é 9999 */
+  margin-right: 45vh;
 }
 
 ul li a {
@@ -30,11 +15,6 @@ ul li a {
   margin-right: 10px;
   font-size: 17px;
 }
-
-.nav-item:hover {
-  cursor: pointer;
-  border-bottom: 2px solid rgb(212, 127, 0);
-  height: 41px;
-}
+  
 
   
