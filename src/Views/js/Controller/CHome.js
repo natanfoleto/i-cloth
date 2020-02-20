@@ -6,6 +6,12 @@ $(document).ready(() => {
         LoadPageInternal('container', 'Usuarios', 'VUsuarios');
     });
 
+    $('#l_perfil').click((event) => {
+        event.preventDefault();
+
+        LoadPageInternal('container', 'Perfil', 'VPerfil');
+    });
+
 });
 
 

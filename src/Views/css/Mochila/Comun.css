@@ -1,0 +1,23 @@
+body {
+    overflow-y: scroll !important;
+}
+
+.content {
+    border: 1px solid rgb(216, 216, 216);
+    border-radius: 0.25rem;
+    padding-top: 25px;
+    margin-bottom: 20px;
+}
+
+.content h4, i {
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(85, 85, 85);
+}
+
+hr {
+    margin: 2 0 10 0 !important;
+}
+
+.footer {
+    margin-bottom: 30px;
+}
