@@ -1,18 +1,78 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.logo, .search, .menu {
+    position: relative;
+    padding: 30 0 30 0;
+}
+
+.title, .form, .link {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.form input {
+    width: 20vw !important;
+    box-shadow: none !important;
+    border-color: rgb(165, 165, 165);
+    outline: 0 !important;
+}
+
+.form input:focus {
+    border-color: rgb(255, 165, 47) !important;
+}
+
+.form button {
+    color: rgb(255, 165, 47);
+    border-color: rgb(255, 165, 47);
+    box-shadow: none !important;
+    outline: 0 !important;
+}
+
+.form button:hover {
+    color: white;
+    border-color: rgb(255, 165, 47);
+    background: rgb(255, 165, 47);
+    box-shadow: none !important;
+    outline: 0 !important;
+}
+
+.link a {
+    color: black;
+}
+
+.link a:hover {
+    color: rgb(255, 165, 47);
+    text-decoration: none;
+}
+
 .navbar {
-    background: #E76C02 !important;
+    background: rgba(0, 0, 0, 0.301) !important;
+    position: absolute;
+    z-index: 9999; 
 }
 
 .nav-item {
     color: white;
-    font-size: 20px;
-    font-weight: bold;
-    margin-right: 15px;
-    margin-left: 15px;
-    
+    font-size: 18px;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .navbar-nav li a:hover {
-    color: rgba(255, 255, 255, 0.815);
+    color: rgb(255, 165, 47);
+}
+
+#carousel-main {
+    margin-top: -60px !important;
+}
+
+.carousel-item img {
+    height: 700px;
 }
   
     

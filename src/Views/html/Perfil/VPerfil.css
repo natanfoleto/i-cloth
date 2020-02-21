@@ -1,23 +1,143 @@
-.profile-info {
-    border: 1px solid rgb(216, 216, 216);
-    border-radius: 0.25rem;
-    height: 80vh;
-}
-
-.profile-form {
-    border: 1px solid rgb(216, 216, 216);
-    border-radius: 0.25rem;
-    height: 80vh;
-}
-
 .photo {
-    background: chartreuse;
+    margin-top: 10px;
+    border: 1px solid rgb(216, 216, 216);
     border-radius: 0.25rem;
-    height: 30vh;
+    height: 255px;
+    position: relative;
+}
+
+.photo img {
+    margin: 0;
+    background: rgb(248, 248, 248);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 100%;
+    width: 100%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
 }
 
 .usuario-logado {
-    margin: 10 10 10 10;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 15 0 10 2;
+}
+
+.usuario-logado h4 {
+    font-weight: bold;
+}
+
+.usuario-logado p {
+    font-size: 18px;
+    color: rgb(143, 143, 143);
+}
+
+.logout {
+    margin-bottom: 35px;
+}
+
+.logout button {
+    font-size: 17px;
+    color: rgb(40, 40, 40) !important;
+    background: rgb(245, 245, 245) !important;
+    border: 1px solid rgb(216, 216, 216) !important;
+}
+
+.logout button:hover {
+    font-size: 17px;
+    color: rgb(40, 40, 40) !important;
+    background: rgb(238, 238, 238) !important;
+}
+
+.star i {
+    font-size: 12px;
+    color: rgb(107, 107, 107);
+    margin-right: 6px;
+}
+
+.star p {
+    background: rgb(24, 168, 24);
+    border: none !important;
+    border-radius: 0.10rem;
+    outline: 0 !important;
+    box-shadow: none !important;
+    padding: 0 3 0 3 !important;
+    margin-bottom: 3 !important;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.star p:hover {
+    background: rgb(24, 168, 24);
+}
+
+.btn-perfil {  
+    background: transparent importan;
+    color: rgb(10, 118, 190) !important;
+    font-weight: bold !important;
+    border: 1px solid rgb(226, 226, 226) !important;
+    border-radius: 0.15rem !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+}
+
+.btn-perfil:hover {
+    background: rgb(243, 243, 243) !important;
+    color: rgb(10, 118, 190) !important;
+}
+
+.user-details {
+    font-family: Arial, Helvetica, sans-serif;
+    border: 1px solid rgb(216, 216, 216);
+    border-radius: 0.25rem;
+    margin-top: 10px;
+}
+
+.info {
+    margin: 5 10 10 10;
+}
+
+.info-title {
+    margin-bottom: 15px;
+}
+
+.info-left {
+    border-left: 1px solid rgb(216, 216, 216);
+}
+
+.info-left button {
+    font-size: 14px;
+}
+
+.info-body {
+    margin-bottom: 15px;
+}
+
+.info-body h4 {
+    font-size: 22px;
+}
+
+.info-body h5 {
+    font-weight: bold;
+}
+
+.info-body p {
+    margin-bottom: 30px;
+}
+
+.info-body h5, p {
+    font-size: 17px;
+}
+
+.info-footer button {
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.info-footer p {
+    font-size: 12px;
+    color: rgb(99, 99, 99);
+    margin-bottom: 30px;
 }
 
 
