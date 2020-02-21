@@ -13,7 +13,6 @@ $(document).ready(() => {
                     BlockLogin();
                 } else {
                     LoadPage('Base/VHome');
-                    console.log(JSON.parse(xhttp.responseText));
                 }
             });
     
