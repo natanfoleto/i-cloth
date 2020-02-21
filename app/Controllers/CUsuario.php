@@ -117,30 +117,6 @@ class CUsuario {
         }
     }
 
-    // public function QueryInsert($Object) { 
-    //     try {
-    //         $this->ObjUsuario->Nome = $this->ObjFunc->TratarCaracter($Object['usuario'], 1);
-    //         $this->ObjUsuario->Email = $Object['email'];
-    //         $this->ObjUsuario->Senha = sha1($Object['senha']);
-    //         $this->ObjUsuario->GrupoUsuario = $Object['grupoUsuario'];
-    //         $this->ObjUsuario->DataHoraAdd = $this->ObjFunc->DataAtual(2);
-
-    //         $Query = $this->Conn->GetConnection()->prepare("INSERT INTO `usuarios` (`nome`, `email`, `senha`, `grupoUsuario`, `dataHoraAdd`) VALUES (:Nome, :Email, :Senha, :GrupoUsuario, :DataHoraAdd);");
-    //         $Query->bindParam(":Nome", $this->ObjUsuario->Nome, PDO::PARAM_STR);
-    //         $Query->bindParam(":Email", $this->ObjUsuario->Email, PDO::PARAM_STR);
-    //         $Query->bindParam(":Senha", $this->ObjUsuario->Senha, PDO::PARAM_STR);
-    //         $Query->bindParam(":GrupoUsuario", $this->ObjUsuario->GrupoUsuario, PDO::PARAM_INT);
-    //         $Query->bindParam(":DataHoraAdd", $this->ObjUsuario->DataHoraAdd, PDO::PARAM_STR);
-
-    //         if($Query->execute()) {
-    //             return 'OK';
-    //         } else {
-    //             return 'ERRO';
-    //         }
-    //     } catch(PDOException $ex) {
-    //         return 'Erro: '.$ex->getMessage();
-    //     }
-    // }   
 }
 
 ?>
