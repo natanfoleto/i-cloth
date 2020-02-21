@@ -1,5 +1,15 @@
+:root {
+    --laranja: rgb(255, 165, 45);
+    --preto-gradient: linear-gradient(rgb(255, 255, 255), rgb(220, 220, 220));
+    --cinza: rgb(165, 165, 165);
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.menuall {
+
 }
 
 .logo, .search, .menu {
@@ -8,6 +18,7 @@ body {
 }
 
 .title, .form, .link {
+    font-size: 18px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -18,25 +29,25 @@ body {
 .form input {
     width: 20vw !important;
     box-shadow: none !important;
-    border-color: rgb(165, 165, 165);
+    border-color: var(--cinza);
     outline: 0 !important;
 }
 
 .form input:focus {
-    border-color: rgb(255, 165, 47) !important;
+    border-color: var(--cor-bg-laranja) !important;
 }
 
 .form button {
-    color: rgb(255, 165, 47);
-    border-color: rgb(255, 165, 47);
+    color: var(--laranja);
+    border-color: var(--laranja);
     box-shadow: none !important;
     outline: 0 !important;
 }
 
 .form button:hover {
     color: white;
-    border-color: rgb(255, 165, 47);
-    background: rgb(255, 165, 47);
+    border-color: var(--laranja);
+    background: var(--laranja);
     box-shadow: none !important;
     outline: 0 !important;
 }
@@ -46,33 +57,34 @@ body {
 }
 
 .link a:hover {
-    color: rgb(255, 165, 47);
+    color: var(--laranja);
     text-decoration: none;
 }
 
 .navbar {
-    background: rgba(0, 0, 0, 0.301) !important;
-    position: absolute;
-    z-index: 9999; 
+    background: var(--preto-gradient) !important;
+}
+
+
+.ul-nav {
+    padding-left: 30% !important;
+    width: 100%;
 }
 
 .nav-item {
-    color: white;
+    color: black;
     font-size: 18px;
+    font-weight: bold;
     margin-right: 10px;
     margin-left: 10px;
 }
 
 .navbar-nav li a:hover {
-    color: rgb(255, 165, 47);
-}
-
-#carousel-main {
-    margin-top: -60px !important;
+    color: var(--laranja);
 }
 
 .carousel-item img {
-    height: 700px;
+    height: 70vh;
 }
   
     
