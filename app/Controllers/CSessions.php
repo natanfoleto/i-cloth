@@ -1,9 +1,9 @@
 <?php 
 
-namespace app\Models;
+namespace app\Controllers;
 session_start();
 
-class MSessions {
+class CSessions {
 
     public function CreateSession($name, $value) {
 		$_SESSION[$name] = $value;
@@ -14,6 +14,6 @@ class MSessions {
     }
     
     public function GetSession($name) {
-        echo $_SESSION[$name];
+        return $_SESSION[$name];
     }
 }

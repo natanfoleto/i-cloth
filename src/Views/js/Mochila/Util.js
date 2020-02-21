@@ -1,4 +1,4 @@
-// #region ========================= Funções =========================
+// ========================= Funções =========================
 
 function LoadPage(page) {
    window.location.replace('../../html/' + page + '.phtml');
@@ -21,7 +21,16 @@ function limetedLength(element) {
       element.value = element.value.substr(0, 10);
    }
 }
-// #endregion ====================== Fim Funções ======================
+
+function Logout() {
+   xmlHttpPost('../../../Ajax/Perfil/Logout', function() {
+       success(() => {
+           
+           window.location.replace('../../../../public/VHomeSite.phtml');
+           
+       });
+   }, null);
+}
 
 // #region ==================== Variáveis de Controle =================
 // #endregion ============= Fim | Variáveis de Controle ===============

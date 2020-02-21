@@ -47,68 +47,87 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light fadeInLeft animated">
             <div class="container">
 
-                <a class="navbar-brand" href="#">
-                    <span><img src="../../img/logo.png"></span>
+                <a class="navbar-brand d-none d-md-block" href="#">
+                    <img src="../../img/logo.png">
                 </a>
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Alterna navegação">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(Página atual)</span></a>
+                            <a class="nav-link" href="#">Inicio <span class="sr-only">(Página atual)</span></a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown">
+                                Produtos
+                            </a>
+
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Lista de Produto</a>
+                                <a class="dropdown-item" href="#">Grupo de Produtos</a>
+                            </div>
                         </li>
                     
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Cadastros
+                            <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown">
+                                Equipe
                             </a>
 
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Produtos</a>
-                                <a class="dropdown-item" href="#">Estoque</a>
-                                <a class="dropdown-item" href="#">Fornecedores</a>
-                                <a id="l_usuarios" class="dropdown-item" href="#">Usuários</a>
-                                <a class="dropdown-item" href="#">Grupo de Produtos</a>
+                            <div class="dropdown-menu">
+                                <a id="l_usuarios" class="dropdown-item" href="#">Lista de Usuários</a>
                                 <a class="dropdown-item" href="#">Grupo de Usuários</a>
                             </div>
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Estoque
+                            <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown">
+                                Clientes
                             </a>
 
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Visualizar Estoque</a>
-                                <a class="dropdown-item" href="#">Baixa</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Lista de Clientes</a>
                             </div>
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown">
+                                Fornecedores
+                            </a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown">
                                 Relatórios
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="#">Produtos</a>
+                                <a class="dropdown-item" href="#">Equipe</a>
                                 <a class="dropdown-item" href="#">Clientes</a>
-                                <a class="dropdown-item" href="#">Baixas</a>
+                                <a class="dropdown-item" href="#">Fornecedores</a>
                                 <a class="dropdown-item" href="#">Registro de Atividades</a>
                             </div>
                         </li>
-
+                    
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Configurações
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="navDrop">
+                                <i class="fas fa-user-circle"></i>
                             </a>
-
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a id="l_perfil" class="dropdown-item" href="#">Perfil</a>
-                                <a class="dropdown-item" href="#">Permissões</a>
-                                <a class="dropdown-item" href="#">Sair</a>
+                            <div class="dropdown-menu">
+                                <a id="l_perfil" class="dropdown-item" href="">
+                                    <strong> Conectado </strong> como <br> <strong> Natan Foleto </strong>
+                                </a>      
+                                <hr>      
+                                <a class="dropdown-item" href="">
+                                    <i class="fas fa-cog"></i> Configurações
+                                </a>
+                                <a id="l_logout" class="dropdown-item" href="">
+                                    <i class="fas fa-sign-out-alt"></i> Sair 
+                                </a>                                
                             </div>
                         </li>
 

@@ -48,11 +48,21 @@ $(document).ready(() => {
 async function OnLoad() {
     gruposUsuarios = await GetGroupUsers();
     usuarios = await GetUsers();
+
+    $("#load").attr("hidden", 1);
+    $("#usuarios").removeAttr("hidden");
 }
 
 function GetGroupUsers() {
     return new Promise((resolve, reject) => {
         xmlHttpPost('../../../Ajax/Grupo Usuarios/GetGroupUser', function() {
+            beforeSend(function() {
+                $('#load').html(
+                    `<center><i class="fa fa-sync fa-spin fa-4x fa-fw"></i><span class="sr-only">
+                    Loading...</span></center>`
+                );
+            });
+
             success(() => {
                 if(JSON.parse(xhttp.responseText == 404)) {
                     reject($('#table').html(

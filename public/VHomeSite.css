@@ -1,12 +1,21 @@
 :root {
     --laranja: rgb(255, 165, 45);
-    --branco-gradient: linear-gradient(rgb(255, 255, 255), rgb(230, 230, 230));
+    --branco-gradient: linear-gradient(rgb(230, 230, 230), rgb(215, 215, 215));
     --preto-claro: rgb(70, 70, 70);
     --cinza: rgb(165, 165, 165);
 }
 
 body {
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.title img {
+    height: 5vh;
+    width: 10vw;
+}
+
+.header {
+    background: linear-gradient(rgb(255, 255, 255), rgb(230, 230, 230));;
 }
 
 .logo, .search, .menu {
