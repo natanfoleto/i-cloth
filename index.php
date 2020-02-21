@@ -4,6 +4,6 @@
 
 <script>
 	$( document ).ready(function() {
-		window.location.href = "public/VMenu.phtml";
+		window.location.href = "public/VHomeSite.phtml";
 	});
 </script>
